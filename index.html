@@ -12,23 +12,36 @@
 </head>
 <body class="bg-purple-200">
     <header>
-    <nav class="bg-purple-900 h-24 w-full">
-        <div class="max-w-screen-xl mx-auto p-4 flex items-center justify-center">
-            <div class="flex items-center space-x-4">
-                <a href="#quisuisje" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4">Qui suis-je ?</a>
-                <a href="#monparcours" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4">Mon parcours</a>
-                <a href="#projets" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4">Projets</a>
+        <nav class="bg-purple-900 w-full" x-data="{ isOpen: false }">
+            <div class="max-w-screen-xl mx-auto p-4 flex items-center justify-between">
                 <div class="h-16 w-16 md:h-20 md:w-20 overflow-hidden">
-                    <img src="assets/PNG et JPG/logo.png" class="h-full w-full object-contain mx-2" alt="yabaa"/>
+                    <img src="assets/PNG et JPG/logo.png" class="h-full w-full object-contain" alt="yabaa"/>
                 </div>
-                <a href="#competlog" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4">Compétences et logiciels</a>
-                <a href="#contact" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4">Contact</a>
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#quisuisje" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Qui suis-je ?</a>
+                    <a href="#monparcours" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Mon parcours</a>
+                    <a href="#projets" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Projets</a>
+                    <a href="#competlog" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Compétences et logiciels</a>
+                    <a href="#contact" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Contact</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-2 md:space-x-4">
+                    <a href="assets/cv.pdf" class="bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-2 md:px-4 rounded" download="assets/cv.pdf">Télécharge mon CV !</a>
+                </div>
+                <button @click="isOpen = !isOpen" class="md:hidden text-white focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
             </div>
-            <div class="flex items-center space-x-2 md:space-x-4 ml-4">
-                <a href="assets/cv.pdf" class="bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-2 md:px-4 rounded" download="assets/cv.pdf">Télécharge mon CV !</a>
+            <div x-show="isOpen" x-transition class="md:hidden bg-purple-900">
+                <a href="#quisuisje" class="block text-xl font-extrabold text-white px-4 py-2">Qui suis-je ?</a>
+                <a href="#monparcours" class="block text-xl font-extrabold text-white px-4 py-2">Mon parcours</a>
+                <a href="#projets" class="block text-xl font-extrabold text-white px-4 py-2">Projets</a>
+                <a href="#competlog" class="block text-xl font-extrabold text-white px-4 py-2">Compétences et logiciels</a>
+                <a href="#contact" class="block text-xl font-extrabold text-white px-4 py-2">Contact</a>
+                <a href="assets/cv.pdf" class="block bg-black text-white font-bold text-center py-2 px-4 rounded mx-4 my-2" download="assets/cv.pdf">Télécharge mon CV !</a>
             </div>
-        </div>
-    </nav>
+        </nav>
     <div class="relative isolate overflow-hidden h-220">
         <img src="assets/PNG et JPG/portugal2.jpg" alt="" class="absolute inset-0 -z-10 w-full h-full object-cover blur-sm contrast-125">
         <div class="flex flex-col items-center justify-center h-full">
@@ -42,7 +55,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between mt-10">
             <div class="w-full md:w-1/2 mb-8 md:mb-0">
                 <h1 class="text-4xl font-extrabold text-center">Qui suis-je ?</h1>
-                <p class="text-3xl mx-4 md:mx-15 mt-12">Salut 👋, Moi, c'est Younès, étudiant en BUT Métiers du Multimédia et de l'Internet. Débordant d'idées et de créativité, je bouillonne d'énergie. La preuve, j'ai intégré le parcours Fabrik ta pépite en entreprenant et innovant un réveil du futur. Notamment dans mes productions musicales où je mélange passion et rythme. Si vous voulez gagner les Play-offs NBA, laissez-moi rejoindre votre équipe !</p>
+                <p class="text-3xl mx-4 md:mx-15 mt-12">Salut 👋, Producteur musical et étudiant en BUT Métiers du Multimédia et de l'Internet, Moi, c'est Younès ! Débordant d'idées et de créativité, je bouillonne d'énergie. La preuve, j'ai intégré le parcours Fabrik ta pépite en entreprenant et innovant un réveil du futur. Notamment dans mes productions musicales où je mélange passion et rythme. Si vous voulez gagner les Play-offs NBA, laissez-moi rejoindre votre équipe !</p>
             </div>
             <div class="w-full md:w-1/2 flex justify-center md:justify-end">
                 <img src="assets/PNG et JPG/moi.JPG" alt="" class="h-150 w-full object-cover rounded-lg shadow-lg">
@@ -69,7 +82,7 @@
             </div>
             <div class="text-center p-6 bg-white rounded-lg shadow-xl">
                 <p class="text-2xl italic mb-4">2023</p>
-                <h2 class="text-3xl font-extrabold mb-4">Attestation SecNumAccadémie</h2>
+                <h2 class="text-3xl font-extrabold mb-4">Attestation SecNumAcadémie</h2>
                 <p class="text-2xl">à domicile. Formation en ligne sur la cybersécurité.</p>
             </div>
             <div class="text-center p-6 bg-white rounded-lg shadow-xl">
@@ -472,30 +485,87 @@
     <div id="competlog" class="max-w-screen-xl mx-auto p-8">
         <h1 class="text-4xl font-extrabold text-center mb-8">Compétences et Logiciels</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div class="flex flex-col items-center space-y-15">
+            <div class="flex flex-col items-center space-y-8">
                 <h2 class="text-3xl font-bold mb-4 mt-4">Compétences</h2>
                 <div class="bg-white p-6 rounded-lg shadow-lg mt-4">
                     <h3 class="text-2xl font-bold mb-4">Hardskills</h3>
-                    <p class="text-xl">Audit, Création audio, UX/UI Design, Gestion de projets, Création visuel, Développement web, Outils numériques, Langues étrangères, Interview, Gestion des réseaux, Outils marketing, Entrepreunariat, S'occuper des paiements, Accueillir les clients.</p>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
+                        <li>Audit</li>
+                        <li>Création audio</li>
+                        <li>UX/UI Design</li>
+                        <li>Création visuel</li>
+                        <li>Développement web</li>
+                        <li>Outils numériques</li>
+                        <li>Interview</li>
+                        <li>Langues étrangères</li>
+                        <li>Outils marketing</li>
+                        <li>Entrepreunariat</li>
+                        <li>S'occuper des paiements</li>
+                        <li>Accueillir les clients</li>
+                        <li>Gestion des réseaux</li>
+                        <li>Gestion de projets</li>
+                    </ul>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-bold mb-4">Softskills</h3>
-                    <p class="text-xl">Créatif, Leadership, Respectueux, Organisé, Propreté, Ésprit compétitif, Indépendant, Curieux, Voyageur, Autonome, Travailleur, Persévérant, Audacieux, Communisation, Mémoire.</p>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
+                        <li>Créatif</li>
+                        <li>Leadership</li>
+                        <li>Respectueux</li>
+                        <li>Organisé</li>
+                        <li>Propreté</li>
+                        <li>Esprit compétitif</li>
+                        <li>Indépendant</li>
+                        <li>Curieux</li>
+                        <li>Voyageur</li>
+                        <li>Autonome</li>
+                        <li>Travailleur</li>
+                        <li>Persévérant</li>
+                        <li>Audacieux</li>
+                        <li>Mémoire</li>
+                        <li>Communication</li>
+                    </ul>
                 </div>
             </div>
-            <div class="flex flex-col items-center space-y-2">
+            <div class="flex flex-col items-center space-y-8">
                 <h2 class="text-3xl font-bold mb-4 mt-4">Logiciels/Outils</h2>
                 <div class="bg-white p-6 rounded-lg shadow-lg mt-4">
                     <h3 class="text-2xl font-bold mb-4">Outils de développement</h3>
-                    <p class="text-xl">Visual Studio Code, Github, HTML 5, CSS 3, JavaScript, Blender, Tailwind, Bulma.</p>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
+                        <li>VS Code</li>
+                        <li>Github</li>
+                        <li>HTML 5</li>
+                        <li>CSS 3</li>
+                        <li>JavaScript</li>
+                        <li>Blender</li>
+                        <li>Tailwind</li>
+                        <li>Bulma</li>
+                    </ul>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-bold mb-4">Création audio et visuel</h3>
-                    <p class="text-xl">Suite adobe et affinity, DaVinci Resolve, Figma, FLStudio, Audacity.</p>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
+                        <li>Suite Adobe</li>
+                        <li>Suite Affinity</li>
+                        <li>DaVinci Resolve</li>
+                        <li>Figma</li>
+                        <li>FLStudio</li>
+                        <li>Audacity</li>
+                    </ul>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-bold mb-4">Gestion de Projet, analyse marketing et entrepreunariat</h3>
-                    <p class="text-xl">Gantt Project, SWOT, PESTEL, Pack microsoft office, Trello, Sphinx campus, Lean Canvas, Personae, tableaux d'analyses.</p>
+                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
+                        <li>Gantt Project</li>
+                        <li>SWOT</li>
+                        <li>PESTEL</li>
+                        <li>Trello</li>
+                        <li>Sphinx Campus</li>
+                        <li>Lean Canvas</li>
+                        <li>Personae</li>
+                        <li>Tableaux d'analyses</li>
+                        <li>Pack Microsoft Office</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -503,37 +573,39 @@
     </main>
     <footer id="contact" class="max-w-screen-xl mx-auto p-8">
         <h1 class="text-4xl font-extrabold text-center">Contacts / Mes plateformes / Mon CV</h1>
+        <div class="space-y-8 mt-8">
+            <a href="mailto:younes.amarbenaa@gmail.com" class="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+                <img src="assets/SVG/mail.svg" alt="mail" class="w-50 h-50" aria-hidden="true">
+                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon adresse mail:</span>younes.amarbenaa@gmail.com</p>
+            </a>
+            <a href="tel:0613885349" class="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+                <img src="assets/SVG/tel.svg" alt="telephone" class="w-50 h-50" aria-hidden="true">
+                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon numéro de téléphone:</span>06.13.88.53.49</p>
+            </a>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-20 mt-8">
-            <a href="mailto:younes.amarbenaa@gmail.com" class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/mail.svg" alt="" class="w-50 h-50 aria-hidden">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon adresse mail:</span>y.by.you22@gmail.com</p>
+            <a href="https://www.linkedin.com/in/youn%C3%A8s-amar-47b637229/" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+                <img src="assets/SVG/linkedin.svg" alt="linkedin" class="w-50 h-50" aria-hidden="true">
+                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon LinkedIn:</span>Younès Amar</p>
             </a>
-            <a class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/tel.svg" alt="telephone" class="w-50 h-50 aria-hidden">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon numero de téléphone:</span>06.13.88.53.49</p>
+            <a href="https://www.instagram.com/senyu.0/" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+                <img src="assets/SVG/insta.svg" alt="instagram" class="w-50 h-50" aria-hidden="true">
+                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon Instagram:</span>@senyu.0</p>
             </a>
-            <a href="https://www.linkedin.com/in/youn%C3%A8s-amar-47b637229/" class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/linkedin.svg" alt="linkedin" class="w-50 h-50 aria-hidden">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon linkedin:</span>Younès Amar</p>
+            <a href="https://www.youtube.com/@senyu.0" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+                <img src="assets/SVG/yt.svg" alt="youtube" class="w-50 h-50" aria-hidden="true">
+                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Ma chaîne YouTube:</span>Senyu</p>
             </a>
-            <a href="https://www.instagram.com/ybyyouu/" class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/insta.svg" alt="instagram" class="w-50 h-50 aria-hidden">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon instagram:</span>@ybyyouu</p>
+            <a href="https://discord.gg/gvbfUUFX" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+                <img src="assets/SVG/discord.svg" alt="discord" class="w-50 h-50" aria-hidden="true">
+                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon serveur Discord:</span>SenYu</p>
             </a>
-            <a href="https://www.youtube.com/@senyu.0" class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/yt.svg" alt="youtube" class="w-50 h-50 aria-hidden">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Ma chaine youtube:</span>Senyu</p>
+            <a href="https://x.com/senyu_01" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
+                <img src="assets/SVG/x.svg" alt="x" class="w-50 h-50" aria-hidden="true">
+                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon X:</span>Senyu</p>
             </a>
-            <a href="https://discord.gg/gvbfUUFX" class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/discord.svg" alt="discord" class="w-50 h-50 aria-hidden">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon serveur discord:</span>SenYu</p>
-            </a>
-            <a href="https://x.com/senyu_01" class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/x.svg" alt="x" class="w-50 h-50 aria-hidden">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon x:</span>Senyu</p>
-            </a>
-            <a href="assets/cv.pdf" class="inline-flex items-center space-x-2">
-                <img src="assets/SVG/cv.svg" alt="cv" class="w-50 h-50 aria-hidden">
+            <a href="assets/cv.pdf" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105" download="assets/cv.pdf">
+                <img src="assets/SVG/cv.svg" alt="cv" class="w-50 h-50" aria-hidden="true">
                 <p class="font-bold text-black text-4xl mx-4">Mon CV</p>
             </a>
         </div>
