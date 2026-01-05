@@ -1,612 +1,569 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/vnd.icon" href="assets/y.ico">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Portfolio - Younès AMAR</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body { font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        h1, h2, h3, .title-font { font-family: 'Syne', sans-serif; }
+        
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Transition de fond fluide */
+        .bg-transition { transition: background-color 1s ease; }
+
+        /* Classe utilitaire pour l'animation d'arrivée par la droite */
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .slide-in-active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Classe pour stopper les animations (Accessibilité) */
+        .stop-animations *, 
+        .stop-animations *::before, 
+        .stop-animations *::after {
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+        }
+        .maintenance-mode {
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
 </head>
-<body class="bg-purple-200">
-    <header>
-        <nav class="bg-purple-900 w-full" x-data="{ isOpen: false }">
-            <div class="max-w-screen-xl mx-auto p-4 flex items-center justify-between">
-                <div class="h-16 w-16 md:h-20 md:w-20 overflow-hidden">
-                    <img src="assets/PNG et JPG/logo.png" class="h-full w-full object-contain" alt="yabaa"/>
-                </div>
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="#quisuisje" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Qui suis-je ?</a>
-                    <a href="#monparcours" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Mon parcours</a>
-                    <a href="#projets" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Projets</a>
-                    <a href="#competlog" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Compétences et logiciels</a>
-                    <a href="#contact" class="text-xl md:text-2xl font-extrabold text-white mx-2 md:mx-4 transition-transform duration-300 hover:scale-105">Contact</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-2 md:space-x-4">
-                    <a href="assets/CV_Younes_Amar.pdf" class="bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-2 md:px-4 rounded" download="assets/CV_Younes_Amar.pdf">Télécharge mon CV !</a>
-                </div>
-                <button @click="isOpen = !isOpen" class="md:hidden text-white focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-            </div>
-            <div x-show="isOpen" x-transition class="md:hidden bg-purple-900">
-                <a href="#quisuisje" class="block text-xl font-extrabold text-white px-4 py-2">Qui suis-je ?</a>
-                <a href="#monparcours" class="block text-xl font-extrabold text-white px-4 py-2">Mon parcours</a>
-                <a href="#projets" class="block text-xl font-extrabold text-white px-4 py-2">Projets</a>
-                <a href="#competlog" class="block text-xl font-extrabold text-white px-4 py-2">Compétences et logiciels</a>
-                <a href="#contact" class="block text-xl font-extrabold text-white px-4 py-2">Contact</a>
-                <a href="assets/CV_Younes_Amar.pdf" class="block bg-black text-white font-bold text-center py-2 px-4 rounded mx-4 my-2" download="assets/CV_Younes_Amar.pdf">Télécharge mon CV !</a>
-            </div>
-        </nav>
-    <div class="relative isolate overflow-hidden h-220">
-        <img src="assets/PNG et JPG/portugal2.jpg" alt="" class="absolute inset-0 -z-10 w-full h-full object-cover blur-sm contrast-125">
-        <div class="flex flex-col items-center justify-center h-full">
-            <img src="assets/PNG et JPG/logo.png" alt="yabaa" class="w-100 h-100 mb-4">
-            <a href="#quisuisje" class="bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-4 px-8 text-xl rounded">Voir plus</a>
+
+<body class="bg-neutral-900 text-white bg-transition overflow-hidden"
+      x-data="{ 
+          activeSection: 'intro', 
+          currentColor: '#DF6C4F',
+          menuOpen: false,
+          animationsEnabled: true
+      }"
+      :class="!animationsEnabled ? 'stop-animations' : ''">
+
+    <div class="fixed inset-0 z-[9999] bg-black/60 backdrop-blur flex items-center justify-center p-6 text-center">
+        <div class="max-w-2xl bg-neutral-900/80 p-10 md:p-16 rounded-[2.5rem] border border-white/10 shadow-2xl">
+            <div class="w-16 h-1 bg-[#DF6C4F] mx-auto mb-8"></div>
+            <h2 class="text-4xl md:text-6l font-extrabold title-font mb-6 tracking-tighter">SITE EN <br><span class="text-[#DF6C4F]">CONSTRUCTION</span></h2>
+            <p class="text-gray-300 text-lg md:text-xl mb-10 leading-relaxed font-light">
+                Il sera accessible au plus vite. Toutes mes excuses. <br class="hidden md:block">
+                Pour plus d'informations, veuillez me contacter sur cette adresse mail :
+            </p>
+            <a href="mailto:younes.amarbenaa@gmail.com" class="relative z-[10000] pointer-events-auto inline-block text-white text-xl md:text-2xl font-bold border-b-2 border-[#DF6C4F] hover:text-[#DF6C4F] transition-colors pb-1">
+                younes.amarbenaa@gmail.com
+            </a>
         </div>
     </div>
+
+    <div class="maintenance-mode">
+        <button class="fixed top-4 right-4 z-[100] px-4 py-2 bg-black/80 text-white font-bold text-xs uppercase tracking-widest border border-white/20 rounded">
+            STOP ANIMATION
+        </button>
+
+    <nav class="fixed right-4 md:right-10 top-1/2 transform -translate-y-1/2 z-50 hidden md:flex flex-col items-end space-y-6 mix-blend-difference">
+        
+        <a href="#intro" @click="activeSection = 'intro'" class="group flex items-center space-x-4 cursor-pointer">
+            <span class="text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 uppercase tracking-widest" :class="activeSection === 'intro' ? 'opacity-100' : ''">Accueil</span>
+            <div class="w-1 h-12 bg-white/30 rounded-full transition-all duration-500 relative overflow-hidden group-hover:h-16 group-hover:bg-white"
+                 :class="activeSection === 'intro' ? '!h-32 !bg-white scale-110' : ''">
+                 <div class="absolute bottom-0 left-0 w-full bg-current transition-all duration-500" 
+                      :style="`height: ${activeSection === 'intro' ? '100%' : '0%'}; background-color: ${currentColor}`"></div>
+            </div>
+        </a>
+
+        <a href="#quisuisje" @click="activeSection = 'quisuisje'" class="group flex items-center space-x-4 cursor-pointer">
+            <span class="text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 uppercase tracking-widest" :class="activeSection === 'quisuisje' ? 'opacity-100' : ''">Bio</span>
+            <div class="w-1 h-12 bg-white/30 rounded-full transition-all duration-500 relative overflow-hidden group-hover:h-16 group-hover:bg-white"
+                 :class="activeSection === 'quisuisje' ? '!h-32 !bg-white scale-110' : ''">
+                 <div class="absolute bottom-0 left-0 w-full transition-all duration-500" 
+                      :style="`height: ${activeSection === 'quisuisje' ? '100%' : '0%'}; background-color: ${currentColor}`"></div>
+            </div>
+        </a>
+
+        <a href="#parcours" @click="activeSection = 'parcours'" class="group flex items-center space-x-4 cursor-pointer">
+            <span class="text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 uppercase tracking-widest" :class="activeSection === 'parcours' ? 'opacity-100' : ''">Parcours</span>
+            <div class="w-1 h-12 bg-white/30 rounded-full transition-all duration-500 relative overflow-hidden group-hover:h-16 group-hover:bg-white"
+                 :class="activeSection === 'parcours' ? '!h-32 !bg-white scale-110' : ''">
+                 <div class="absolute bottom-0 left-0 w-full transition-all duration-500" 
+                      :style="`height: ${activeSection === 'parcours' ? '100%' : '0%'}; background-color: ${currentColor}`"></div>
+            </div>
+        </a>
+
+        <a href="#projets" @click="activeSection = 'projets'" class="group flex items-center space-x-4 cursor-pointer">
+            <span class="text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 uppercase tracking-widest" :class="activeSection === 'projets' ? 'opacity-100' : ''">Projets</span>
+            <div class="w-1 h-12 bg-white/30 rounded-full transition-all duration-500 relative overflow-hidden group-hover:h-16 group-hover:bg-white"
+                 :class="activeSection === 'projets' ? '!h-32 !bg-white scale-110' : ''">
+                 <div class="absolute bottom-0 left-0 w-full transition-all duration-500" 
+                      :style="`height: ${activeSection === 'projets' ? '100%' : '0%'}; background-color: ${currentColor}`"></div>
+            </div>
+        </a>
+
+        <a href="#competences" @click="activeSection = 'competences'" class="group flex items-center space-x-4 cursor-pointer">
+            <span class="text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 uppercase tracking-widest" :class="activeSection === 'competences' ? 'opacity-100' : ''">Compétences</span>
+            <div class="w-1 h-12 bg-white/30 rounded-full transition-all duration-500 relative overflow-hidden group-hover:h-16 group-hover:bg-white"
+                 :class="activeSection === 'competences' ? '!h-32 !bg-white scale-110' : ''">
+                 <div class="absolute bottom-0 left-0 w-full transition-all duration-500" 
+                      :style="`height: ${activeSection === 'competences' ? '100%' : '0%'}; background-color: ${currentColor}`"></div>
+            </div>
+        </a>
+
+        <a href="#contact" @click="activeSection = 'contact'" class="group flex items-center space-x-4 cursor-pointer">
+            <span class="text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 uppercase tracking-widest" :class="activeSection === 'contact' ? 'opacity-100' : ''">Contact</span>
+            <div class="w-1 h-12 bg-white/30 rounded-full transition-all duration-500 relative overflow-hidden group-hover:h-16 group-hover:bg-white"
+                 :class="activeSection === 'contact' ? '!h-32 !bg-white scale-110' : ''">
+                 <div class="absolute bottom-0 left-0 w-full transition-all duration-500" 
+                      :style="`height: ${activeSection === 'contact' ? '100%' : '0%'}; background-color: ${currentColor}`"></div>
+            </div>
+        </a>
+
+    </nav>
+
+    <header class="fixed top-0 left-0 w-full p-6 z-40 flex justify-between items-center md:hidden mix-blend-difference">
+        <span class="font-bold text-xl uppercase title-font">Younès.Portfolio</span>
+        <button @click="menuOpen = !menuOpen" class="text-white text-2xl">☰</button>
     </header>
-    <main>
-    <div id="quisuisje" class="max-w-screen-xl mx-auto p-8">
-        <div class="flex flex-col md:flex-row items-center justify-between mt-10">
-            <div class="w-full md:w-1/2 mb-8 md:mb-0">
-                <h1 class="text-4xl font-extrabold text-center">Qui suis-je ?</h1>
-                <p class="text-3xl mx-4 md:mx-15 mt-12">Salut 👋, Producteur musical et étudiant en BUT Métiers du Multimédia et de l'Internet, Moi, c'est Younès ! Débordant d'idées et de créativité, je bouillonne d'énergie. La preuve, j'ai intégré le parcours Fabrik ta pépite en entreprenant et innovant un réveil du futur. Notamment dans mes productions musicales où je mélange passion et rythme. Si vous voulez gagner les Play-offs NBA, laissez-moi rejoindre votre équipe !</p>
-            </div>
-            <div class="w-full md:w-1/2 flex justify-center md:justify-end">
-                <img src="assets/PNG et JPG/moi.jpg" alt="" class="h-150 w-full object-cover rounded-lg shadow-lg">
-            </div>
-        </div>
+    
+    <div x-show="menuOpen" class="fixed inset-0 bg-black z-30 flex flex-col items-center justify-center space-y-8" x-transition>
+        <button @click="menuOpen = false" class="absolute top-6 right-6 text-white text-4xl">&times;</button>
+        <a href="#intro" @click="menuOpen=false" class="text-3xl title-font font-bold">Accueil</a>
+        <a href="#quisuisje" @click="menuOpen=false" class="text-3xl title-font font-bold">Bio</a>
+        <a href="#parcours" @click="menuOpen=false" class="text-3xl title-font font-bold">Parcours</a>
+        <a href="#projets" @click="menuOpen=false" class="text-3xl title-font font-bold">Projets</a>
+        <a href="#competences" @click="menuOpen=false" class="text-3xl title-font font-bold">Compétences</a>
+        <a href="#contact" @click="menuOpen=false" class="text-3xl title-font font-bold">Contact</a>
     </div>
-    <div id="monparcours" class="max-w-screen-xl mx-auto p-8">
-        <h1 class="text-4xl font-extrabold text-center mb-12">Mon Parcours</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div class="text-center p-6 bg-white rounded-lg shadow-xl">
-                <p class="text-2xl italic mb-4">2024-2027</p>
-                <h2 class="text-3xl font-extrabold mb-4">BUT Métiers du Multimédia et de l'Internet</h2>
-                <p class="text-2xl">à l'IUT de Lannion, Université de Rennes. Formation touchant le développement Web, la communication et le marketing, le graphisme et l'audiovisuel.</p>
+
+    <main class="w-full relative">
+
+        <section id="intro" 
+                 x-intersect.threshold.0.3="activeSection = 'intro'; currentColor = '#DF6C4F'" 
+                 class="h-screen w-full relative flex flex-col items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
+                 style="background-image: url('assets/PNG et JPG/portugal2.jpg');">
+            
+            <div class="absolute inset-0 bg-black/70 z-0"></div>
+
+            <div class="z-10 text-center max-w-4xl mx-auto px-6">
+                <h1 class="text-6xl md:text-9xl font-black leading-none title-font text-white mb-8">
+                    YOUNÈS<br>AMAR
+                </h1>
+                
+                <div class="mt-8 flex justify-center gap-6">
+                    <a href="#projets" class="px-8 py-3 rounded-full border border-white/20 hover:bg-[#DF6C4F] hover:border-[#DF6C4F] transition-all duration-300 uppercase tracking-widest text-sm font-bold bg-black/30 backdrop-blur-sm">Voir les projets</a>
+                    <a href="assets/cv.pdf" download="assets/cv.pdf" class="px-8 py-3 rounded-full border border-white/20 hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm font-bold bg-black/30 backdrop-blur-sm">Télécharger CV</a>
+                </div>
             </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-xl">
-                <p class="text-2xl italic mb-4">2022-2024</p>
-                <h2 class="text-3xl font-extrabold mb-4">Baccalauréat STI2D</h2>
-                <p class="text-2xl">au Lycée Sacré Coeur de Saint Brieuc. Formation touchant la physique-chimie, les mathématiques, l'ingénierie, l'innovation et développement durable avec option Système d'Information et Numérique.</p>
+        </section>
+
+        <section id="quisuisje" 
+                 x-intersect.threshold.0.3="activeSection = 'quisuisje'; currentColor = '#9b59b6'" 
+                 class="min-h-[70vh] flex flex-col items-center justify-center p-6 md:p-20 bg-[#0e0e0e] relative border-b border-white/5">
+            
+            <div class="max-w-4xl mx-auto text-center z-10">
+                <h2 class="text-[#9b59b6] font-bold tracking-[0.2em] uppercase mb-2">Track 01</h2>
+                <h2 class="text-5xl md:text-7xl font-bold title-font mb-12">QUI SUIS-JE ?</h2>
+
+                <div class="flex flex-col items-center">
+                    <div class="w-48 h-48 md:w-60 md:h-60 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl mb-8 relative">
+                        <img src="assets/PNG et JPG/moi.JPG" alt="Younès Amar" class="w-full h-full object-cover">
+                    </div>
+
+                    <p class="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl font-light tracking-wide text-justify md:text-center">
+                        Salut 👋, Moi, c'est Younès, étudiant en BUT Métiers du Multimédia et de l'Internet. Débordant d'idées et de créativité, je bouillonne d'énergie. La preuve, j'ai intégré le parcours "Fabrik ta pépite" en entreprenant et innovant un réveil du futur. Notamment dans mes productions musicales où je mélange passion et rythme. Si vous voulez gagner les Play-offs NBA, laissez-moi rejoindre votre équipe !
+                    </p>
+                </div>
             </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-xl">
-                <p class="text-2xl italic mb-4">2024</p>
-                <h2 class="text-3xl font-extrabold mb-4">Permis B</h2>
-                <p class="text-2xl">à Abyss Auto École de Lamballe.</p>
+
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#9b59b6] rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+        </section>
+
+        <section id="parcours" 
+                 x-intersect.threshold.0.1="activeSection = 'parcours'; currentColor = '#2779a7'" 
+                 x-data="{ showParcours: false }"
+                 class="py-10 md:py-16 flex flex-col relative px-6 md:px-20 bg-[#0a0a0a] min-h-[50vh]">
+            
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2779a7] to-transparent opacity-20"></div>
+
+            <div class="max-w-7xl mx-auto w-full flex flex-col items-start gap-8">
+                
+                <div class="w-full">
+                    <h2 class="text-[#2779a7] font-bold tracking-[0.2em] uppercase mb-2 text-sm">Track 02</h2>
+                    <h3 class="text-4xl md:text-7xl font-bold title-font mb-6">MON PARCOURS</h3>
+                    
+                    <button @click="showParcours = !showParcours" 
+                            class="text-2xl md:text-4xl font-light text-white hover:text-[#2779a7] transition-colors text-left group flex items-center gap-4 border-b border-white/10 pb-8 w-full">
+                        <span>Découvrez mon parcours</span>
+                        <span class="transform transition-transform duration-500 text-3xl" :class="showParcours ? 'rotate-90' : 'rotate-0'">→</span>
+                    </button>
+                </div>
+
+                <div x-show="showParcours" 
+                     x-transition:enter="transition ease-out duration-500"
+                     x-transition:enter-start="opacity-0 max-h-0"
+                     x-transition:enter-end="opacity-100 max-h-[2000px]"
+                     x-transition:leave="transition ease-in duration-300"
+                     x-transition:leave-start="opacity-100 max-h-[2000px]"
+                     x-transition:leave-end="opacity-0 max-h-0"
+                     class="w-full grid grid-cols-1 md:grid-cols-2 gap-16 overflow-hidden relative pt-8">
+                    
+                    <div class="border-l border-white/10 pl-8">
+                        <h3 class="text-2xl font-bold text-white mb-10 slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 100ms;">
+                            FORMATIONS
+                        </h3>
+                        
+                        <div class="space-y-12">
+                            <div class="group relative slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 200ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-[#2779a7] rounded-full ring-4 ring-[#0a0a0a] scale-125"></span>
+                                <span class="text-[#2779a7] font-mono text-sm mb-1 block">2024 — 2027</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-[#2779a7]">BUT MMI</h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">IUT de Lannion. Développement Web, Communication, Marketing, Graphisme et Audiovisuel.</p>
+                                <span class="inline-block px-3 py-1 rounded-full border border-[#2779a7]/30 text-[#2779a7] text-xs font-bold uppercase">En cours</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 300ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">2024</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Permis B</h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Abyss Auto École, Lamballe.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Autonomie, Mobilité</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 400ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">2022 — 2024</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Baccalauréat STI2D</h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Lycée Sacré Coeur, St Brieuc. Option SIN (Ingénierie, Innovation et Développement durable).</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Logique ingénieur, SIN</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 500ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">2023</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Attestation SecNumAccadémie</h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Formation certifiante de l'ANSSI sur la sécurité numérique.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Cybersécurité, Hygiène numérique</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-l border-white/10 pl-8">
+                        <h3 class="text-2xl font-bold text-white mb-10 slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 600ms;">
+                            EXPÉRIENCES PRO
+                        </h3>
+
+                        <div class="space-y-12">
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 700ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Avril 2025 (1 mois)</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Agent de production <span class="text-base font-normal text-gray-400 ml-2">Kermene</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Collinée. Travail à la chaîne, conformité des pièces, tests qualité et prise en main machines.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Travail d’équipe, Travail de nuit</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 800ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Été 2024 (2 mois)</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Barman / Serveur <span class="text-base font-normal text-gray-400 ml-2">La Cabane sur les Quais</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Paimpol. Création de cocktails, service client, prise de commande.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Communication, Créativité, Relationnel</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 900ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Août 2023</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Serveur <span class="text-base font-normal text-gray-400 ml-2">La Cabane sur les Quais</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Paimpol. Service en salle, enthousiasme et efficacité.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Travail d’équipe, Rigueur</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 1000ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Juillet 2023</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Agent de production <span class="text-base font-normal text-gray-400 ml-2">Sobreval</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Jugon-les-Lacs. Travail à la chaîne, vérification conformité.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Endurance, Cadence</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 1100ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Déc. 2022</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Stage Coach Sportif <span class="text-base font-normal text-gray-400 ml-2">Plaisir du Sport</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Paimpol. Accueil des adhérents, observation et assistance coaching.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Accueil, Pédagogie</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 1200ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Juillet 2022</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Ostréiculteur <span class="text-base font-normal text-gray-400 ml-2">SARL Corlouer</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Ploubazlanec. Tri des huîtres, gestion des poches, conduite de chaland.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Force de travail, Persévérance</span>
+                            </div>
+
+                             <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 1300ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Déc. 2021</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Stage Géotechnique <span class="text-base font-normal text-gray-400 ml-2">Solcap</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Trégueux. Analyse de données sol/roche, terrain.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Recherche, Rigueur scientifique</span>
+                            </div>
+
+                            <div class="relative group slide-in-right" :class="showParcours ? 'slide-in-active' : ''" style="transition-delay: 1400ms;">
+                                <span class="absolute -left-[2.25rem] top-2 w-4 h-4 bg-gray-700 rounded-full ring-4 ring-[#0a0a0a]"></span>
+                                <span class="text-gray-500 font-mono text-sm mb-1 block">Avril 2019</span>
+                                <h4 class="text-xl md:text-2xl font-bold mb-2 text-white">Stage Pharmacie <span class="text-base font-normal text-gray-400 ml-2">Pharmacie de Jugon</span></h4>
+                                <p class="text-gray-400 font-light text-sm mb-3">Mise en rayon, vérification péremption, logistique.</p>
+                                <span class="text-xs text-gray-300 bg-white/5 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full">Acquis : Découverte professionnelle, Organisation</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-xl">
-                <p class="text-2xl italic mb-4">2023</p>
-                <h2 class="text-3xl font-extrabold mb-4">Attestation SecNumAcadémie</h2>
-                <p class="text-2xl">à domicile. Formation en ligne sur la cybersécurité.</p>
+        </section>
+
+        <section id="projets" 
+                 x-intersect.threshold.0.1="activeSection = 'projets'; currentColor = '#E0A62F'" 
+                 class="min-h-screen flex flex-col justify-center py-20 px-6 bg-[#111]">
+            
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="mb-16">
+                    <h2 class="text-[#E0A62F] font-bold tracking-[0.2em] uppercase mb-2 text-sm">Track 03</h2>
+                    <h3 class="text-5xl md:text-7xl font-bold title-font text-white mb-6">MES PROJETS</h3>
+                    <p class="text-gray-400 max-w-xl">Une architecture de mes compétences et réalisations, classées par domaine d'expertise.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <a href="ux-ui.html" class="group relative aspect-square border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-[#9b59b6] hover:bg-[#9b59b6]/10 hover:z-10 bg-transparent">
+                        <h4 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest group-hover:text-[#9b59b6] transition-colors duration-300 text-center px-4">
+                            UX / UI
+                        </h4>
+                    </a>
+
+                    <a href="projets/son.html" class="group relative aspect-square border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-[#3498db] hover:bg-[#3498db]/10 hover:z-10 bg-transparent">
+                        <h4 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest group-hover:text-[#3498db] transition-colors duration-300 text-center px-4">
+                            SON
+                        </h4>
+                    </a>
+
+                    <a href="projets/dev-web.html" class="group relative aspect-square border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-[#2ecc71] hover:bg-[#2ecc71]/10 hover:z-10 bg-transparent">
+                        <h4 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest group-hover:text-[#2ecc71] transition-colors duration-300 text-center px-4">
+                            DÉVELOPPEMENT<br>WEB
+                        </h4>
+                    </a>
+
+                    <a href="projets/entrepreneuriat.html" class="group relative aspect-square border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-[#f1c40f] hover:bg-[#f1c40f]/10 hover:z-10 bg-transparent">
+                        <h4 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest group-hover:text-[#f1c40f] transition-colors duration-300 text-center px-4">
+                            ENTREPRENEURIAT
+                        </h4>
+                    </a>
+
+                    <a href="projets/audiovisuel.html" class="group relative aspect-square border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-[#e74c3c] hover:bg-[#e74c3c]/10 hover:z-10 bg-transparent">
+                        <h4 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest group-hover:text-[#e74c3c] transition-colors duration-300 text-center px-4">
+                            AUDIOVISUEL
+                        </h4>
+                    </a>
+
+                    <a href="projets/communication.html" class="group relative aspect-square border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-[#e67e22] hover:bg-[#e67e22]/10 hover:z-10 bg-transparent">
+                        <h4 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest group-hover:text-[#e67e22] transition-colors duration-300 text-center px-4">
+                            COMMUNICATION<br>MARKETING
+                        </h4>
+                    </a>
+
+                    <a href="projets/graphisme.html" class="md:col-start-2 group relative aspect-square border border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-[#1abc9c] hover:bg-[#1abc9c]/10 hover:z-10 bg-transparent">
+                        <h4 class="text-xl md:text-3xl font-bold text-white uppercase tracking-widest group-hover:text-[#1abc9c] transition-colors duration-300 text-center px-4">
+                            GRAPHISME / 3D
+                        </h4>
+                    </a>
+
+                </div>
             </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-xl">
-                <p class="text-2xl italic mb-4">2023-2025</p>
-                <h2 class="text-3xl font-extrabold mb-4">Serveur/Barman</h2>
-                <p class="text-2xl">La Cabane sur les Quais à Paimpol.</p>
-            </div>
-            <div class="text-center p-6 bg-white rounded-lg shadow-xl">
-                <p class="text-2xl italic mb-4">Décembre 2022</p>
-                <h2 class="text-3xl font-extrabold mb-4">Technicien géotechnique</h2>
-                <p class="text-2xl">Solcap à Tregueux.</p>
-            </div>
-        </div>
-    </div>
-    <div id="projets" class="max-w-screen-xl mx-auto p-8">
-        <h1 class="text-4xl font-extrabold text-center mb-8">Mes projets</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="flex flex-col items-center space-y-8">
-                <div class="bg-white rounded-lg p-4 flex items-center max-w-xl shadow-xl">
-                    <div class="flex-1">
-                        <h2 class="text-3xl font-extrabold">Innovation d'un réveil du futur</h2>
-                        <p class="text-xl mt-2 font-medium">Zen'it est un réveil analysant le sommeil grâce à l'intelligence artificielle. Il endort et réveil avec des stimulus olfactif, visuel ainsi qu'auditif.</p>
-                        <div x-data="{modalIsOpen: false}">
-                            <button x-on:click="modalIsOpen = true" type="button" class="mt-4 bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-4 rounded">Clic pour en savoir plus</button>
-                            <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms x-trap.inert.noscroll="modalIsOpen" x-on:keydown.esc.window="modalIsOpen = false" x-on:click.self="modalIsOpen = false" class="fixed inset-0 z-30 flex items-center justify-center bg-black/20 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="defaultModalTitle" role="alertdialog" aria-label="Information sur le projet Zen'it">
-                                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" class="relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100">
-                                    <button x-on:click="modalIsOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" title="Fermer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                        <span class="sr-only">Fermer</span>
-                                    </button>
-                                    <div class="p-4">
-                                        <h1 id="defaultModalTitle" class="text-3xl font-extrabold tracking-wide text-gray-900 dark:text-gray-100 mb-2">Zen'it</h1>
-                                    </div>
-                                    <div class="px-4 py-4 flex">
-                                        <div class="w-2/3">
-                                            <p class="text-lg mb-4">Le projet Zen'it consiste en un réveil du futur conçu pour améliorer le sommeil des étudiants. Grâce à des capteurs, il analyse les informations sonores et sensorielles pour optimiser l'endormissement et le réveil. Il cible principalement les étudiants ayant des difficultés à s'endormir ou à se réveiller.</p>
-                                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div>
-                                                    <h4 class="font-bold">Missions</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Innover</li>
-                                                        <li>Réaliser des personas</li>
-                                                        <li>Réaliser le business plan et model</li>
-                                                        <li>Réaliser un prototype</li>
-                                                        <li>Présenter le projet</li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <h4 class="font-bold">Livrables</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Dossier écrit</li>
-                                                        <li>Prototype</li>
-                                                        <li>Présentation orale</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="flex space-x-2 mt-6">
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/entrepreunariat.svg" alt="" class="w-8 h-8 ">
-                                                    <p>Entrepreunariat</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/gestion de projet.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Gestion de projet</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/persona.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Persona</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/3 flex justify-center items-center">
-                                            <img src="assets/PNG et JPG/zenit2.jpg" alt="" class="w-60 h-90">
-                                        </div>
-                                    </div>
+        </section>
+
+        <section id="competences" 
+                 x-intersect.threshold.0.3="activeSection = 'competences'; currentColor = '#ffffff'" 
+                 class="min-h-screen py-20 px-6 md:px-20 bg-[#000] relative border-b border-white/10">
+            
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24">
+                    
+                    <div>
+                        <h2 class="text-white/50 font-bold tracking-[0.2em] uppercase mb-2 text-sm">Track 04</h2>
+                        <h3 class="text-3xl md:text-5xl font-bold title-font text-white mb-10">LOGICIELS & OUTILS</h3>
+                        
+                        <div class="space-y-12">
+                            <div>
+                                <h4 class="text-[#2779a7] font-bold uppercase tracking-wider mb-4 border-b border-[#2779a7]/20 pb-2">Développement</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#2779a7] rounded-full"></span> VS Code & Github
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#2779a7] rounded-full"></span> HTML5, CSS3, JavaScript
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#2779a7] rounded-full"></span> Tailwind CSS, Bulma
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#2779a7] rounded-full"></span> Blender (3D)
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="text-[#9b59b6] font-bold uppercase tracking-wider mb-4 border-b border-[#9b59b6]/20 pb-2">Création & Audiovisuel</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#9b59b6] rounded-full"></span> Suite Adobe & Affinity
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#9b59b6] rounded-full"></span> DaVinci Resolve
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#9b59b6] rounded-full"></span> Figma (UI/UX)
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#9b59b6] rounded-full"></span> FL Studio & Audacity
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h4 class="text-[#2ecc71] font-bold uppercase tracking-wider mb-4 border-b border-[#2ecc71]/20 pb-2">Gestion & Marketing</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#2ecc71] rounded-full"></span> Pack Office, Trello, Gantt Project
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#2ecc71] rounded-full"></span> Analyses (SWOT, PESTEL, Lean Canvas)
+                                    </li>
+                                    <li class="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                                        <span class="w-1.5 h-1.5 bg-[#2ecc71] rounded-full"></span> Sphinx Campus
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="text-white/50 font-bold tracking-[0.2em] uppercase mb-2 text-sm">Track 05</h2>
+                        <h3 class="text-3xl md:text-5xl font-bold title-font text-white mb-10">COMPÉTENCES</h3>
+                        
+                        <div class="mb-12">
+                            <h4 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                                <span class="w-2 h-8 bg-white"></span> SAVOIR-FAIRE
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-white/5 p-4 rounded hover:bg-white/10 transition-colors border border-white/5">
+                                    <h5 class="font-bold text-white mb-1">Technique</h5>
+                                    <p class="text-sm text-gray-400">Dev Web, Outils numériques, Création visuelle & Audio</p>
+                                </div>
+                                <div class="bg-white/5 p-4 rounded hover:bg-white/10 transition-colors border border-white/5">
+                                    <h5 class="font-bold text-white mb-1">Stratégie</h5>
+                                    <p class="text-sm text-gray-400">Audit, Marketing, Gestion de projet, Entrepreneuriat</p>
+                                </div>
+                                <div class="bg-white/5 p-4 rounded hover:bg-white/10 transition-colors border border-white/5">
+                                    <h5 class="font-bold text-white mb-1">Communication</h5>
+                                    <p class="text-sm text-gray-400">Langues étrangères, Interview, Gestion réseaux sociaux</p>
+                                </div>
+                                <div class="bg-white/5 p-4 rounded hover:bg-white/10 transition-colors border border-white/5">
+                                    <h5 class="font-bold text-white mb-1">Design</h5>
+                                    <p class="text-sm text-gray-400">UX/UI Design, Personae</p>
                                 </div>
                             </div>
-                        </div>                    
-                    </div>
-                    <img src="assets/PNG et JPG/zenit.png" alt="" class="w-40 h-40 ml-4">
-                </div>
-                <div class="bg-white rounded-lg p-4 flex items-center max-w-xl shadow-xl">
-                    <div class="flex-1">
-                        <h2 class="text-3xl font-extrabold">Site web Pokémon</h2>
-                        <p class="text-xl mt-2 font-medium">C'est une application type "pokédex" répertoriant les pokémons. L'utilisateur peut changer son nom, l'ajouter et l'enlever de sa collection.</p>
-                        <div x-data="{modalIsOpen: false}">
-                            <button x-on:click="modalIsOpen = true" type="button" class="mt-4 bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-4 rounded">Clic pour en savoir plus</button>
-                            <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms x-trap.inert.noscroll="modalIsOpen" x-on:keydown.esc.window="modalIsOpen = false" x-on:click.self="modalIsOpen = false" class="fixed inset-0 z-30 flex items-center justify-center bg-black/20 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="defaultModalTitle" role="alertdialog" aria-label="Information sur le projet Site web pokemon">
-                                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" class="relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100">
-                                    <button x-on:click="modalIsOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" title="Fermer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                        <span class="sr-only">Fermer</span>
-                                    </button>
-                                    <div class="p-4">
-                                        <h1 id="defaultModalTitle" class="text-3xl font-extrabold tracking-wide text-gray-900 dark:text-gray-100 mb-2">Site web Pokémon</h1>
-                                    </div>
-                                    <div class="px-4 py-4 flex">
-                                        <div class="w-2/3">
-                                            <p class="text-lg mb-4">Ce projet vise à créer une application web immersive pour gérer une collection de Pokémon, avec une interface moderne et intuitive. Les utilisateurs pourront ajouter, retirer et explorer les détails des Pokémon, tout en profitant d'un design attractif et d'une expérience interactive. L'application allie ergonomie, innovation et l'univers Pokémon pour captiver les passionnés et les débutants.</p>
-                                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div>
-                                                    <h4 class="font-bold">Missions</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Designer la page sur Figma</li>
-                                                        <li>Structurer la page avec du HTML</li>
-                                                        <li>Styliser la page avec du CSS</li>
-                                                        <li>Ajouter des intéractivité avec du JavaScript</li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <h4 class="font-bold">Livrables</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Dossier design (pour le client)</li>
-                                                        <li>Application Web au maximum fonctionnel</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="flex space-x-2 mt-6">
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/web.svg" alt="" class="w-8 h-8">
-                                                    <p>Developpement Web</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/design.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>UX/UI design</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/3 flex justify-center items-center">
-                                            <img src="assets/PNG et JPG/siteweb.png" alt="" class="w-60 h-90">
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                                <span class="w-2 h-8 bg-transparent border-l-2 border-dashed border-gray-500"></span> SAVOIR-ÊTRE
+                            </h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Créatif</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Leadership</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Organisé</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Curieux</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Autonome</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Persévérant</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Audacieux</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Esprit compétitif</span>
+                                <span class="px-4 py-2 rounded-full border border-white/20 text-gray-300 hover:text-white hover:border-white transition-all cursor-default">Voyageur</span>
                             </div>
-                        </div>                    
+                        </div>
+
                     </div>
-                    <img src="assets/PNG et JPG/pokemon.png" alt="" class="w-40 h-40 ml-4">
-                </div>
-                <div class="bg-white rounded-lg p-4 flex items-center max-w-xl shadow-xl">
-                    <div class="flex-1">
-                        <h2 class="text-3xl font-extrabold">Contenu audio et video</h2>
-                        <p class="text-xl mt-2 font-medium">C'est un court métrage réalisé au sein de l'IUT en groupe de 4. Nous avons réalisé le tournage et le montage.</p>
-                        <div x-data="{modalIsOpen: false}">
-                            <button x-on:click="modalIsOpen = true" type="button" class="mt-4 bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-4 rounded">Clic pour en savoir plus</button>
-                            <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms x-trap.inert.noscroll="modalIsOpen" x-on:keydown.esc.window="modalIsOpen = false" x-on:click.self="modalIsOpen = false" class="fixed inset-0 z-30 flex items-center justify-center bg-black/20 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="defaultModalTitle" role="alertdialog" aria-label="Information sur le projet To stop">
-                                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" class="relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100">
-                                    <button x-on:click="modalIsOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" title="Fermer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                        <span class="sr-only">Fermer</span>
-                                    </button>
-                                    <div class="p-4">
-                                        <h1 id="defaultModalTitle" class="text-3xl font-extrabold tracking-wide text-gray-900 dark:text-gray-100 mb-2">To stop</h1>
-                                    </div>
-                                    <div class="px-4 py-4 flex">
-                                        <div class="w-2/3">
-                                            <p class="text-lg mb-4">Nous avons réalisé, en équipe de 4, un court-métrage dont j'étais l'acteur et le réalisateur, en utilisant du matériel audiovisuel professionnel. Après le tournage, j'ai pris en charge le montage sur DaVinci Resolve, avec mixage sonore et étalonnage. Cette expérience m'a plongé dans l'ensemble du processus de création cinématographique, du tournage à la post-production.</p>
-                                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div>
-                                                    <h4 class="font-bold">Missions</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Écriture de l'histoire, du dénouement et de la chute</li>
-                                                        <li>Tournage du court métrage</li>
-                                                        <li>Montage du court métrage</li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <h4 class="font-bold">Livrables</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Dossier de production (Écriture, personnage, etc.)</li>
-                                                        <li>Film V1</li>
-                                                        <li>Film Version Finale avec voix off en français et anglais</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="flex space-x-2 mt-6">
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/ecriture.svg" alt="" class="w-8 h-8">
-                                                    <p>Écriture</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/cinema.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Tournage</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/anglais.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Anglais</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/3 flex justify-center items-center">
-                                            <img src="assets/PNG et JPG/camera.jpg" alt="" class="w-60 h-90">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                    
-                    </div>
-                    <img src="assets/PNG et JPG/tostop.png" alt="" class="w-40 h-40 ml-4">
                 </div>
             </div>
-            <div class="flex flex-col items-center space-y-8">
-                <div class="bg-white rounded-lg p-4 flex items-center max-w-xl shadow-xl">
-                    <div class="flex-1">
-                        <h2 class="text-3xl font-extrabold">Productions musicales</h2>
-                        <p class="text-xl mt-2 font-medium">Ici, je dessers toute ma créativité (je vous en laisse un peu quand même). Ma passion pour la culture musicale me permet cette créativité.</p>
-                        <div x-data="{modalIsOpen: false}">
-                            <button x-on:click="modalIsOpen = true" type="button" class="mt-4 bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-4 rounded">Clic pour en savoir plus</button>
-                            <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms x-trap.inert.noscroll="modalIsOpen" x-on:keydown.esc.window="modalIsOpen = false" x-on:click.self="modalIsOpen = false" class="fixed inset-0 z-30 flex items-center justify-center bg-black/20 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="defaultModalTitle" role="alertdialog" aria-label="Information sur le projet de productions musicales">
-                                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" class="relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100">
-                                    <button x-on:click="modalIsOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" title="Fermer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                        <span class="sr-only">Fermer</span>
-                                    </button>
-                                    <div class="p-4">
-                                        <h1 id="defaultModalTitle" class="text-3xl font-extrabold tracking-wide text-gray-900 dark:text-gray-100 mb-2">Productions musicales</h1>
-                                    </div>
-                                    <div class="px-4 py-4 flex">
-                                        <div class="w-2/3">
-                                            <p class="text-lg mb-4">Depuis mon enfance, la musique, notamment le hip-hop et le rap, m'a poussé à passer du rôle d'auditeur à celui de créateur. En autodidacte, j'ai appris le beatmaking, la composition et le mixage avec FL Studio, sous le nom de SENYU. Mon objectif est de partager mon univers musical et de créer des opportunités de collaboration avec d'autres artistes.</p>
-                                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div>
-                                                    <h4 class="font-bold">Missions</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Composer avec des VST (Virtual Studio Technology)</li>
-                                                        <li>Composer des rythmes</li>
-                                                        <li>Structurer les deux compositions</li>
-                                                        <li>Mixer et masteriser l'instrumentale</li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <h4 class="font-bold">Livrables</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Instrumentale complète (composée, mixée, etc.)</li>
-                                                        <li>Vidéo avec effet pour YouTube</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="flex space-x-2 mt-6">
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/reseau.svg" alt="" class="w-8 h-8">
-                                                    <p>Réseaux sociaux</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/anglais.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Anglais</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/song.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Son</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/3 flex justify-center items-center">
-                                            <img src="assets/PNG et JPG/moicompose.jpg" alt="" class="w-60 h-90">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                    
+        </section>
+
+        <section id="contact" 
+                 x-intersect.threshold.0.5="activeSection = 'contact'; currentColor = '#DF6C4F'" 
+                 class="min-h-[60vh] flex flex-col justify-center bg-[#0a0a0a] px-6 md:px-20 py-20 relative border-t border-white/10">
+            
+            <div class="max-w-5xl mx-auto w-full text-center md:text-left">
+                <h2 class="text-[#DF6C4F] font-bold tracking-[0.2em] uppercase mb-2 text-sm">Track 06</h2>
+                <h3 class="text-4xl md:text-7xl font-bold title-font text-white mb-16">RESTONS EN CONTACT</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-gray-500 text-sm uppercase tracking-widest mb-2">Email</p>
+                            <a href="mailto:younes.amarbenaa@gmail.com" class="text-2xl md:text-4xl font-bold text-white hover:text-[#DF6C4F] transition-colors">
+                                younes.amarbenaa<br>@gmail.com
+                            </a>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-sm uppercase tracking-widest mb-2">Téléphone</p>
+                            <p class="text-2xl md:text-4xl font-bold text-white">06.13.88.53.49</p>
+                        </div>
                     </div>
-                    <img src="assets/PNG et JPG/flstudio.png" alt="" class="w-40 h-40 ml-4">
-                </div>
-                <div class="bg-white rounded-lg p-4 flex items-center max-w-xl shadow-xl">
-                    <div class="flex-1">
-                        <h2 class="text-3xl font-extrabold">Recommandation pour un festival</h2>
-                        <p class="text-xl mt-2 font-medium">Pour le festival à l'west fest au sein des étudiants MMI, nous avons réalisé cette recommandation afin de rééquilibrer le festival.</p>
-                        <div x-data="{modalIsOpen: false}">
-                            <button x-on:click="modalIsOpen = true" type="button" class="mt-4 bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-4 rounded">Clic pour en savoir plus</button>
-                            <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms x-trap.inert.noscroll="modalIsOpen" x-on:keydown.esc.window="modalIsOpen = false" x-on:click.self="modalIsOpen = false" class="fixed inset-0 z-30 flex items-center justify-center bg-black/20 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="defaultModalTitle" role="alertdialog" aria-label="Information sur le projet de recommandation pour un festival">
-                                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" class="relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100">
-                                    <button x-on:click="modalIsOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" title="Fermer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                        <span class="sr-only">Fermer</span>
-                                    </button>
-                                    <div class="p-4">
-                                        <h1 id="defaultModalTitle" class="text-3xl font-extrabold tracking-wide text-gray-900 dark:text-gray-100 mb-2">Recommandation de communication numérique pour le festival "À l'West Fest"</h1>
-                                    </div>
-                                    <div class="px-4 py-4 flex">
-                                        <div class="w-2/3">
-                                            <p class="text-lg mb-4">Le festival À l'West Fest met en avant la créativité et la maîtrise technologique des étudiants du BUT MMI, tout en clôturant l'année de manière festive. En tant que chargé de communication, j'ai conçu une recommandation marketing, un plan de communication, un audit, une charte éditoriale et un communiqué de presse.</p>
-                                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div>
-                                                    <h4 class="font-bold">Missions</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Concevoir une recommandation marketing</li>
-                                                        <li>Établir un plan de communication et un planning d'actions</li>
-                                                        <li>Rédiger une charte éditoriale</li>
-                                                        <li>Produire des prototypes pour une communication digitale</li>
-                                                        <li>Mettre en forme et présenter à l'écrit et à l'oral les choix stratégiques envisagés</li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <h4 class="font-bold">Livrables</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Dossier présentant l'audit et la recommandation marketing</li>
-                                                        <li>Dossier présentant le plan de communication</li>
-                                                        <li>Présentation orale</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="flex space-x-2 mt-6">
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/marketing.svg" alt="" class="w-8 h-8">
-                                                    <p>Marketing</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/comm.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Communication</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/reseau.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Réseaux sociaux</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/3 flex justify-center items-center">
-                                            <img src="assets/PNG et JPG/dossier.png" alt="" class="w-60 h-90">
-                                        </div>
-                                    </div>
-                                </div>
+
+                    <div class="flex flex-col justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm uppercase tracking-widest mb-4">Mes Réseaux</p>
+                            <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                                <a href="https://www.linkedin.com/in/youn%C3%A8s-amar-47b637229/" target="_blank" class="px-6 py-3 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all font-bold">LinkedIn</a>
+                                <a href="https://www.instagram.com/ybyyouu/" target="_blank" class="px-6 py-3 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all font-bold">Instagram</a>
+                                <a href="https://www.youtube.com/@senyu.0" target="_blank" class="px-6 py-3 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all font-bold">YouTube</a>
+                                <a href="https://x.com/senyu_01" target="_blank" class="px-6 py-3 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all font-bold">X (Twitter)</a>
+                                <a href="https://discord.gg/gvbfUUFX" target="_blank" class="px-6 py-3 border border-white/20 rounded-full hover:bg-white hover:text-black transition-all font-bold">Discord</a>
                             </div>
-                        </div>                    
+                        </div>
+
+                        <div class="mt-12">
+                            <a href="assets/cv.pdf" download="assets/cv.pdf" class="inline-block px-8 py-4 bg-[#DF6C4F] text-white font-bold rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105 shadow-lg shadow-[#DF6C4F]/20">
+                                TÉLÉCHARGER MON CV
+                            </a>
+                        </div>
                     </div>
-                    <img src="assets/PNG et JPG/alwestfest.png" alt="" class="w-40 h-40 ml-4">
-                </div>
-                <div class="bg-white rounded-lg p-4 flex items-center max-w-xl shadow-xl">
-                    <div class="flex-1">
-                        <h2 class="text-3xl font-extrabold">SONOLUX</h2>
-                        <p class="text-xl mt-2 font-medium">Cette technologie fiable via arduino mesure les intensités lumineuses ainsi que sonores.</p>
-                        <div x-data="{modalIsOpen: false}">
-                            <button x-on:click="modalIsOpen = true" type="button" class="mt-4 bg-black transition-transform duration-300 hover:scale-105 active:bg-purple-500 text-white font-bold py-2 px-4 rounded">Clic pour en savoir plus</button>
-                            <div x-cloak x-show="modalIsOpen" x-transition.opacity.duration.200ms x-trap.inert.noscroll="modalIsOpen" x-on:keydown.esc.window="modalIsOpen = false" x-on:click.self="modalIsOpen = false" class="fixed inset-0 z-30 flex items-center justify-center bg-black/20 p-4 backdrop-blur-md" role="dialog" aria-modal="true" aria-labelledby="defaultModalTitle" role="alertdialog" aria-label="Information sur le projet Sonolux">
-                                <div x-show="modalIsOpen" x-transition:enter="transition ease-out duration-200 delay-100 motion-reduce:transition-opacity" x-transition:enter-start="opacity-0 scale-50" x-transition:enter-end="opacity-100 scale-100" class="relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-gray-300 bg-white text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100">
-                                    <button x-on:click="modalIsOpen = false" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300" title="Fermer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
-                                        <span class="sr-only">Fermer</span>
-                                    </button>
-                                    <div class="p-4">
-                                        <h1 id="defaultModalTitle" class="text-3xl font-extrabold tracking-wide text-gray-900 dark:text-gray-100 mb-2">SONOLUX, projet Erasmus +</h1>
-                                    </div>
-                                    <div class="px-4 py-4 flex">
-                                        <div class="w-2/3">
-                                            <p class="text-lg mb-4">Le service de néonatologie de Saint-Brieuc est reconnu pour son excellence dans la protection du développement des prématurés, en limitant le stress et en favorisant la présence des parents. Le projet 'Nuisances sonores en réanimation néonatale' consiste à concevoir un outil de mesure fiable des signaux sonores et lumineux pour améliorer leur environnement.</p>
-                                            <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                <div>
-                                                    <h4 class="font-bold">Missions</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Conception, fabrication et mise en fonctionnement d'un outil de captation et d'analyse de signaux sonores et lumineux</li>
-                                                        <li>Installation dans le service de néonatologie de Saint Brieuc</li>
-                                                    </ul>
-                                                </div>
-                                                <div>
-                                                    <h4 class="font-bold">Livrables</h4>
-                                                    <ul class="list-disc list-inside">
-                                                        <li>Conception 3D intégrant l'éléctronique</li>
-                                                        <li>Outil de mesure de l'intensité lumineuse et sonore</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="flex space-x-2 mt-6">
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/anglais.svg" alt="" class="w-8 h-8">
-                                                    <p>Anglais</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/arduino.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>Arduino</p>
-                                                </div>
-                                                <div class="flex items-center space-x-1">
-                                                    <img src="assets/SVG/3D.svg" alt="" class="w-8 h-8 ml-15">
-                                                    <p>3D</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="w-1/3 flex justify-center items-center">
-                                            <img src="assets/SVG/Sonolux.webp" alt="" class="w-60 h-90">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                    
-                    </div>
-                    <img src="assets/PNG et JPG/sonolux.jpg" alt="" class="w-40 h-40 ml-4">
                 </div>
             </div>
-        </div>
-    </div>
-    <div id="competlog" class="max-w-screen-xl mx-auto p-8">
-        <h1 class="text-4xl font-extrabold text-center mb-8">Compétences et Logiciels</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-            <div class="flex flex-col items-center space-y-8">
-                <h2 class="text-3xl font-bold mb-4 mt-4">Compétences</h2>
-                <div class="bg-white p-6 rounded-lg shadow-lg mt-4">
-                    <h3 class="text-2xl font-bold mb-4">Hardskills</h3>
-                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
-                        <li>Audit</li>
-                        <li>Création audio</li>
-                        <li>UX/UI Design</li>
-                        <li>Création visuel</li>
-                        <li>Développement web</li>
-                        <li>Outils numériques</li>
-                        <li>Interview</li>
-                        <li>Langues étrangères</li>
-                        <li>Outils marketing</li>
-                        <li>Entrepreunariat</li>
-                        <li>S'occuper des paiements</li>
-                        <li>Accueillir les clients</li>
-                        <li>Gestion des réseaux</li>
-                        <li>Gestion de projets</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold mb-4">Softskills</h3>
-                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
-                        <li>Créatif</li>
-                        <li>Leadership</li>
-                        <li>Respectueux</li>
-                        <li>Organisé</li>
-                        <li>Propreté</li>
-                        <li>Esprit compétitif</li>
-                        <li>Indépendant</li>
-                        <li>Curieux</li>
-                        <li>Voyageur</li>
-                        <li>Autonome</li>
-                        <li>Travailleur</li>
-                        <li>Persévérant</li>
-                        <li>Audacieux</li>
-                        <li>Mémoire</li>
-                        <li>Communication</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="flex flex-col items-center space-y-8">
-                <h2 class="text-3xl font-bold mb-4 mt-4">Logiciels/Outils</h2>
-                <div class="bg-white p-6 rounded-lg shadow-lg mt-4">
-                    <h3 class="text-2xl font-bold mb-4">Outils de développement</h3>
-                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
-                        <li>VS Code</li>
-                        <li>Github</li>
-                        <li>HTML 5</li>
-                        <li>CSS 3</li>
-                        <li>JavaScript</li>
-                        <li>Blender</li>
-                        <li>Tailwind</li>
-                        <li>Bulma</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold mb-4">Création audio et visuel</h3>
-                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
-                        <li>Suite Adobe</li>
-                        <li>Suite Affinity</li>
-                        <li>DaVinci Resolve</li>
-                        <li>Figma</li>
-                        <li>FLStudio</li>
-                        <li>Audacity</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h3 class="text-2xl font-bold mb-4">Gestion de Projet, analyse marketing et entrepreunariat</h3>
-                    <ul class="grid grid-cols-2 md:grid-cols-3 gap-4 text-xl">
-                        <li>Gantt Project</li>
-                        <li>SWOT</li>
-                        <li>PESTEL</li>
-                        <li>Trello</li>
-                        <li>Sphinx Campus</li>
-                        <li>Lean Canvas</li>
-                        <li>Personae</li>
-                        <li>Tableaux d'analyses</li>
-                        <li>Pack Microsoft Office</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+            
+            <footer class="absolute bottom-6 left-0 w-full text-center text-gray-700 text-xs uppercase tracking-widest">
+                © 2025 Younès Amar - Portfolio MMI
+            </footer>
+        </section>
+
     </main>
-    <footer id="contact" class="max-w-screen-xl mx-auto p-8">
-        <h1 class="text-4xl font-extrabold text-center">Contacts / Mes plateformes / Mon CV</h1>
-        <div class="space-y-8 mt-8">
-            <a href="mailto:younes.amarbenaa@gmail.com" class="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-                <img src="assets/SVG/mail.svg" alt="mail" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon adresse mail:</span>younes.amarbenaa@gmail.com</p>
-            </a>
-            <a href="tel:0613885349" class="flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-                <img src="assets/SVG/tel.svg" alt="telephone" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon numéro de téléphone:</span>06.13.88.53.49</p>
-            </a>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-20 mt-8">
-            <a href="https://www.linkedin.com/in/youn%C3%A8s-amar-47b637229/" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-                <img src="assets/SVG/linkedin.svg" alt="linkedin" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon LinkedIn:</span>Younès Amar</p>
-            </a>
-            <a href="https://www.instagram.com/senyu.0/" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-                <img src="assets/SVG/insta.svg" alt="instagram" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon Instagram:</span>@senyu.0</p>
-            </a>
-            <a href="https://www.youtube.com/@senyu.0" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-                <img src="assets/SVG/yt.svg" alt="youtube" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Ma chaîne YouTube:</span>Senyu</p>
-            </a>
-            <a href="https://discord.gg/gvbfUUFX" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-                <img src="assets/SVG/discord.svg" alt="discord" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon serveur Discord:</span>SenYu</p>
-            </a>
-            <a href="https://x.com/senyu_01" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105">
-                <img src="assets/SVG/x.svg" alt="x" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4"><span class="sr-only">Mon X:</span>Senyu</p>
-            </a>
-            <a href="assets/CV_Younes_Amar.pdf" class="inline-flex items-center space-x-2 transition-transform duration-300 hover:scale-105" download="assets/CV_Younes_Amar.pdf">
-                <img src="assets/SVG/cv.svg" alt="cv" class="w-50 h-50" aria-hidden="true">
-                <p class="font-bold text-black text-4xl mx-4">Mon CV</p>
-            </a>
-        </div>
-    </footer>
 </body>
 </html>
